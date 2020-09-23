@@ -1,4 +1,4 @@
-package setup.steps.example;
+package wiremock.steps.example;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.common.ConsoleNotifier;

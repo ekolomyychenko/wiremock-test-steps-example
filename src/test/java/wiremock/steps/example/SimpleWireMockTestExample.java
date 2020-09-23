@@ -1,4 +1,4 @@
-package setup.steps.example;
+package wiremock.steps.example;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;

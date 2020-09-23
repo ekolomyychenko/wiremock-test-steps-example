@@ -1,4 +1,4 @@
-package setup.steps.example;
+package wiremock.steps.example;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;
@@ -35,9 +35,9 @@ public class DifferentResponseForSecondRequestWireMockTestExample extends BaseTe
         given()
                 .baseUri("http://localhost:8282")
                 .body("{\"someparam\": \"someValue\"}")
-                .when()
+        .when()
                 .post("/url/v1/different/stubs")
-                .then()
+        .then()
                 .spec(responseSpecSecondRequest);
     }
 
