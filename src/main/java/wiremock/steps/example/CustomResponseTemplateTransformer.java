@@ -16,9 +16,9 @@ import java.util.regex.Pattern;
 @Log4j2
 public class CustomResponseTemplateTransformer extends ResponseDefinitionTransformer {
 
-    private static final String TRANSFORMER_NAME = "custom-transformer";
-    private static final boolean APPLY_GLOBALLY = false;
-    private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\{\\{((?:(?!\\}\\}|\\{\\{).)+)\\}\\}");
+    private final String TRANSFORMER_NAME = "custom-transformer";
+    private final boolean APPLY_GLOBALLY = false;
+    private final Pattern VARIABLE_PATTERN = Pattern.compile("\\{\\{((?:(?!\\}\\}|\\{\\{).)+)\\}\\}");
 
     @Override
     public ResponseDefinition transform(Request request, ResponseDefinition responseDefinition, FileSource fileSource, Parameters parameters) {
