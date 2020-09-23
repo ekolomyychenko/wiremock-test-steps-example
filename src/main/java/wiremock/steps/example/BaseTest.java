@@ -13,15 +13,13 @@ public class BaseTest {
 
     @BeforeAll
     public static void before() {
-        wm.start();
+        WIRE_MOCK_SERVER.start();
     }
 
-    public static final WireMockServer wm = new WireMockServer(
+    public static final WireMockServer WIRE_MOCK_SERVER = new WireMockServer(
             options()
                     .port(8282)
                     .withRootDirectory("src/test/resources/wiremock")
-                    .extensions(new CustomResponseTemplateTransformer()
-                            , new ResponseTemplateTransformer(true)
-                    )
+                    .extensions(new CustomResponseTemplateTransformer(), new ResponseTemplateTransformer(true))
                     .notifier(new ConsoleNotifier(true)));
 }
