@@ -8,7 +8,6 @@
       "custom-transformer"
     ],
     "status": 200,
-    "bodyFileName" : "response_templating_test_response_body.json"
-
+    "bodyFileName": "response_templating_test_response_body.json"
   }
 }

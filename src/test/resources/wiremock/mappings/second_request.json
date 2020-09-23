@@ -10,6 +10,6 @@
       "response-template"
     ],
     "status": 200,
-    "bodyFileName" : "second_request_response.json"
+    "bodyFileName": "second_request_response.json"
   }
 }

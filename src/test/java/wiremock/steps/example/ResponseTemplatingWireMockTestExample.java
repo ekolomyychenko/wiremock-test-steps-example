@@ -19,9 +19,9 @@ public class ResponseTemplatingWireMockTestExample extends BaseTest {
         given()
                 .baseUri("http://localhost:8282")
                 .body("{\"someparam\": \"someValue\"}")
-                .when()
+        .when()
                 .post("/response_templating_test_url/v1")
-                .then()
+        .then()
                 .spec(responseSpec);
     }
 }
