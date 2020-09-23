@@ -35,5 +35,4 @@ public class SimpleWireMockTestExample extends BaseTest {
         .then()
                 .spec(responseSpec);
     }
-
 }

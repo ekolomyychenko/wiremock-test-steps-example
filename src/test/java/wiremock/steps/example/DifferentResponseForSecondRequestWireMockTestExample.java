@@ -11,7 +11,6 @@ public class DifferentResponseForSecondRequestWireMockTestExample extends BaseTe
 
     @Test
     public void different_response_for_second_request_wiremock_test()  {
-
         // 1-st request
         ResponseSpecification responseSpecFirstRequest = new ResponseSpecBuilder()
                 .expectStatusCode(200)
@@ -40,6 +39,4 @@ public class DifferentResponseForSecondRequestWireMockTestExample extends BaseTe
         .then()
                 .spec(responseSpecSecondRequest);
     }
-
-
 }

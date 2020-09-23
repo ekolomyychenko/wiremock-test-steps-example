@@ -24,5 +24,4 @@ public class BaseTest {
                             , new ResponseTemplateTransformer(true)
                     )
                     .notifier(new ConsoleNotifier(true)));
-
 }

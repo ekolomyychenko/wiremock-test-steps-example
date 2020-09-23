@@ -17,11 +17,8 @@ import java.util.regex.Pattern;
 public class CustomResponseTemplateTransformer extends ResponseDefinitionTransformer {
 
     private static final String TRANSFORMER_NAME = "custom-transformer";
-
     private static final boolean APPLY_GLOBALLY = false;
-
-    private static Pattern VARIABLE_PATTERN = Pattern.compile("\\{\\{((?:(?!\\}\\}|\\{\\{).)+)\\}\\}");
-
+    private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\{\\{((?:(?!\\}\\}|\\{\\{).)+)\\}\\}");
 
     @Override
     public ResponseDefinition transform(Request request, ResponseDefinition responseDefinition, FileSource fileSource, Parameters parameters) {
@@ -32,22 +29,17 @@ public class CustomResponseTemplateTransformer extends ResponseDefinitionTransfo
             BinaryFile binaryFile = fileSource.getBinaryFileNamed(responseDefinition.getBodyFileName());
             body = new String(binaryFile.readContents(), StandardCharsets.UTF_8);
         }
-
         return ResponseDefinitionBuilder
                 .like(responseDefinition).but()
                 .withBodyFile(null)
                 .withBody(transformResponse(body))
                 .build();
-
     }
 
     private String transformResponse(String response) {
-
         String modifiedResponse = response;
-
         Matcher matcher = VARIABLE_PATTERN.matcher(modifiedResponse);
         StringBuffer buffer = null;
-
         while (matcher.find()) {
             if (buffer == null) {
                 buffer = new StringBuffer();
@@ -57,12 +49,10 @@ public class CustomResponseTemplateTransformer extends ResponseDefinitionTransfo
             //  Put some session/context variables or other data that you don't know before test run
             matcher.appendReplacement(buffer, "lol kek");
         }
-
         if (buffer != null) {
             matcher.appendTail(buffer);
             modifiedResponse = buffer.toString();
         }
-
         return modifiedResponse;
     }
 

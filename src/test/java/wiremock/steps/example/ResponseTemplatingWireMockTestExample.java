@@ -24,5 +24,4 @@ public class ResponseTemplatingWireMockTestExample extends BaseTest {
                 .then()
                 .spec(responseSpec);
     }
-
 }
