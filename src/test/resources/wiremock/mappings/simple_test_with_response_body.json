@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPattern": "(.*)/simple_test_response_body_url/v1(.*)"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName" : "simple_test_response_body.json"
+
+  }
+}

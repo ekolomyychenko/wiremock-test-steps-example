@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPattern": "(.*)/response_templating_test_url/v1(.*)"
+  },
+  "response": {
+    "transformers": [
+      "custom-transformer"
+    ],
+    "status": 200,
+    "bodyFileName" : "response_templating_test_response_body.json"
+
+  }
+}

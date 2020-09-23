@@ -1,0 +1,9 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPattern": "(.*)/simple_test_url/v1(.*)"
+  },
+  "response": {
+    "status": 200
+  }
+}

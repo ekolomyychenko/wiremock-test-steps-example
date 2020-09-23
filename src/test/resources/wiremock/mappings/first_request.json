@@ -1,0 +1,16 @@
+{
+  "scenarioName": "Different responses",
+  "requiredScenarioState": "Started",
+  "newScenarioState": "Second successful request",
+  "request": {
+    "method": "POST",
+    "urlPattern": ".*/url/v1/different/stubs.*"
+  },
+  "response": {
+    "transformers": [
+      "response-template"
+    ],
+    "status": 200,
+    "bodyFileName" : "first_request_response.json"
+  }
+}
