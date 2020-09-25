@@ -19,10 +19,10 @@ import java.util.*;
 @Log4j2
 public class WireMockClient {
 
-    private static final String WIRE_MOCK_URL = "/__admin/requests";
-    private static final String WIRE_MOCK_FIND_URL = "/__admin/requests/find";
-    private static final String WIRE_MOCK_UNMATCHED_URL = "/__admin/requests/unmatched";
-    private static final String WIRE_MOCK_MATCHED_COUNT_URL = "/__admin/requests/count";
+    private final String WIRE_MOCK_URL = "/__admin/requests";
+    private final String WIRE_MOCK_FIND_URL = "/__admin/requests/find";
+    private final String WIRE_MOCK_UNMATCHED_URL = "/__admin/requests/unmatched";
+    private final String WIRE_MOCK_MATCHED_COUNT_URL = "/__admin/requests/count";
 
     private String getBaseUrl() {
         return "http://localhost:8282";
