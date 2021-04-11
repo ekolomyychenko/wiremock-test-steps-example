@@ -16,8 +16,6 @@ import java.util.regex.Pattern;
 @Log4j2
 public class CustomResponseTemplateTransformer extends ResponseDefinitionTransformer {
 
-    private final String TRANSFORMER_NAME = "custom-transformer";
-    private final boolean APPLY_GLOBALLY = false;
     private final Pattern VARIABLE_PATTERN = Pattern.compile("\\{\\{((?:(?!\\}\\}|\\{\\{).)+)\\}\\}");
 
     @Override
@@ -58,11 +56,11 @@ public class CustomResponseTemplateTransformer extends ResponseDefinitionTransfo
 
     @Override
     public String getName() {
-        return TRANSFORMER_NAME;
+        return "custom-transformer";
     }
 
     @Override
     public boolean applyGlobally() {
-        return APPLY_GLOBALLY;
+        return false;
     }
 }

@@ -59,10 +59,8 @@ public class WireMockClient {
 
         Map<String, Map<String, ArrayList<String>>> request = findServerEvents.jsonPath().getMap("requests[0].queryParams");
         Map<String, String> queryParams = new HashMap<>();
-        Iterator<Map.Entry<String, Map<String, ArrayList<String>>>> iterator = request.entrySet().iterator();
 
-        while (iterator.hasNext()) {
-            Map.Entry<String, Map<String, ArrayList<String>>> pair = iterator.next();
+        for (Map.Entry<String, Map<String, ArrayList<String>>> pair : request.entrySet()) {
             queryParams.put(pair.getKey(), pair.getValue().get("values").get(0));
         }
         return queryParams;
@@ -70,7 +68,7 @@ public class WireMockClient {
 
     private void assertRequestCount(int size) {
         Assertions.assertTrue((size != 0), "No outer request was found");
-        Assertions.assertTrue(size == 1, "More then one outer request was found");
+        Assertions.assertEquals(size, 1, "More then one outer request was found");
     }
 
     @SneakyThrows
