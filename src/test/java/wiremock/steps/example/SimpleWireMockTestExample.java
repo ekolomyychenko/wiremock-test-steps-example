@@ -15,7 +15,7 @@ public class SimpleWireMockTestExample extends BaseTest {
     public void simple_wiremock_test()  {
         given()
                 .baseUri("http://localhost:8282")
-                .body("{\"someparam\": \"someValue\"}")
+                .body("{\"someParam\": \"someValue\"}")
         .when()
                 .post("/simple_test_url/v1")
         .then()
@@ -32,7 +32,7 @@ public class SimpleWireMockTestExample extends BaseTest {
 
         given()
                 .baseUri("http://localhost:8282")
-                .body("{\"someparam\": \"someValue\"}")
+                .body("{\"someParam\": \"someValue\"}")
         .when()
                 .post("/simple_test_response_body_url/v1")
         .then()

@@ -21,7 +21,7 @@ public class DifferentResponseForSecondRequestWireMockTestExample extends BaseTe
 
 		given()
 				.baseUri("http://localhost:8282")
-				.body("{\"someparam\": \"someValue\"}")
+				.body("{\"someParam\": \"someValue\"}")
 				.when()
 				.post("/url/v1/different/stubs")
 				.then()
@@ -35,7 +35,7 @@ public class DifferentResponseForSecondRequestWireMockTestExample extends BaseTe
 
 		given()
 				.baseUri("http://localhost:8282")
-				.body("{\"someparam\": \"someValue\"}")
+				.body("{\"someParam\": \"someValue\"}")
 				.when()
 				.post("/url/v1/different/stubs")
 				.then()
