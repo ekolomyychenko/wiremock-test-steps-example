@@ -18,8 +18,12 @@ public class BaseTest {
 
     public static final WireMockServer WIRE_MOCK_SERVER = new WireMockServer(
             options()
-                    .port(8282)
+                    .dynamicPort()
                     .withRootDirectory("src/test/resources/wiremock")
                     .extensions(new CustomResponseTemplateTransformer(), new ResponseTemplateTransformer(true))
                     .notifier(new ConsoleNotifier(true)));
+
+    protected static String getBaseUrl() {
+        return "http://localhost:" + WIRE_MOCK_SERVER.port();
+    }
 }

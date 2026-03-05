@@ -1,6 +1,7 @@
 package wiremock.steps.example;
 
 
+import com.github.tomakehurst.wiremock.WireMockServer;
 import com.google.common.net.HttpHeaders;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -24,8 +25,14 @@ public class WireMockClient {
     private final String WIRE_MOCK_UNMATCHED_URL = "/__admin/requests/unmatched";
     private final String WIRE_MOCK_MATCHED_COUNT_URL = "/__admin/requests/count";
 
+    private final String baseUrl;
+
+    public WireMockClient(WireMockServer server) {
+        this.baseUrl = "http://localhost:" + server.port();
+    }
+
     private String getBaseUrl() {
-        return "http://localhost:8282";
+        return baseUrl;
     }
 
     @SneakyThrows

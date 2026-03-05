@@ -5,10 +5,11 @@ import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.StringContains.containsString;
 
-public class ResponseTemplatingWireMockTestExample extends BaseTest {
+public class ResponseTemplatingWireMockTest extends BaseTest {
+
+    private final RequestSteps steps = new RequestSteps();
 
     @Test
     @DisplayName("Пример подстановки в ответ от wiremock данных на лету — это может быть переменная из контекста или сессии, которая не известна заранее")
@@ -18,12 +19,7 @@ public class ResponseTemplatingWireMockTestExample extends BaseTest {
                 .expectBody(containsString("lol kek"))
                 .build();
 
-        given()
-                .baseUri("http://localhost:8282")
-                .body("{\"someParam\": \"someValue\"}")
-        .when()
-                .post("/response_templating_test_url/v1")
-        .then()
+        steps.post(getBaseUrl(), "/response_templating_test_url/v1", "{\"someParam\": \"someValue\"}")
                 .spec(responseSpec);
     }
 }
