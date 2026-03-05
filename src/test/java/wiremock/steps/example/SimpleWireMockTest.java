@@ -9,7 +9,7 @@ import static org.hamcrest.core.StringContains.containsString;
 
 public class SimpleWireMockTest extends BaseTest {
 
-    private final RequestSteps steps = new RequestSteps();
+    private static final RequestSteps steps = new RequestSteps();
 
     @Test
     @DisplayName("Пример простой заглушки без тела ответа")

@@ -4,6 +4,7 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.common.ConsoleNotifier;
 import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
@@ -13,7 +14,16 @@ public class BaseTest {
 
     @BeforeAll
     public static void before() {
-        WIRE_MOCK_SERVER.start();
+        if (!WIRE_MOCK_SERVER.isRunning()) {
+            WIRE_MOCK_SERVER.start();
+        }
+    }
+
+    @AfterAll
+    public static void after() {
+        if (WIRE_MOCK_SERVER.isRunning()) {
+            WIRE_MOCK_SERVER.stop();
+        }
     }
 
     public static final WireMockServer WIRE_MOCK_SERVER = new WireMockServer(

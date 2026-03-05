@@ -20,10 +20,10 @@ import java.util.*;
 @Log4j2
 public class WireMockClient {
 
-    private final String WIRE_MOCK_URL = "/__admin/requests";
-    private final String WIRE_MOCK_FIND_URL = "/__admin/requests/find";
-    private final String WIRE_MOCK_UNMATCHED_URL = "/__admin/requests/unmatched";
-    private final String WIRE_MOCK_MATCHED_COUNT_URL = "/__admin/requests/count";
+    private static final String WIRE_MOCK_URL = "/__admin/requests";
+    private static final String WIRE_MOCK_FIND_URL = "/__admin/requests/find";
+    private static final String WIRE_MOCK_UNMATCHED_URL = "/__admin/requests/unmatched";
+    private static final String WIRE_MOCK_MATCHED_COUNT_URL = "/__admin/requests/count";
 
     private final String baseUrl;
 
@@ -35,33 +35,27 @@ public class WireMockClient {
         return baseUrl;
     }
 
-    @SneakyThrows
-    public Response getAllServerEvents(String wireMockBaseUrl) {
-        return RestAssured.get(wireMockBaseUrl + WIRE_MOCK_URL);
-
+    public Response getAllServerEvents() {
+        return RestAssured.get(getBaseUrl() + WIRE_MOCK_URL);
     }
 
-    @SneakyThrows
     private RequestSpecification buildFindRequest(@NonNull File request) {
         return RestAssured.given()
                 .header(HttpHeaders.ACCEPT, "application/json")
-                .body(request)
-                .given();
+                .body(request);
     }
 
-    @SneakyThrows
     public String getServerEventBody(@NonNull File requestJson) {
         Response findServerEvents = buildFindRequest(requestJson).post(getBaseUrl() + WIRE_MOCK_FIND_URL);
-        log.info("Found requests: \n" + findServerEvents);
+        log.info("Found requests: \n{}", findServerEvents);
         List<Map<String, String>> requests = findServerEvents.jsonPath().getList("requests");
         assertRequestCount(requests.size());
         return requests.get(0).get("body");
     }
 
-    @SneakyThrows
     public Map<String, String> getServerEventQueryParams(@NonNull File requestJson) {
         Response findServerEvents = buildFindRequest(requestJson).post(getBaseUrl() + WIRE_MOCK_FIND_URL);
-        log.info("Found requests: \n" + findServerEvents);
+        log.info("Found requests: \n{}", findServerEvents);
         assertRequestCount(findServerEvents.jsonPath().getList("requests").size());
 
         Map<String, Map<String, ArrayList<String>>> request = findServerEvents.jsonPath().getMap("requests[0].queryParams");
@@ -75,26 +69,24 @@ public class WireMockClient {
 
     private void assertRequestCount(int size) {
         Assertions.assertTrue((size != 0), "No outer request was found");
-        Assertions.assertEquals(size, 1, "More then one outer request was found");
+        Assertions.assertEquals(1, size, "More then one outer request was found");
     }
 
-    @SneakyThrows
     public void deleteAllServerEvents() {
         RestAssured.delete(getBaseUrl() + WIRE_MOCK_URL);
     }
 
-    @SneakyThrows
-    public void checkUnmatchedRequest() {
+    public void assertNoUnmatchedRequests() {
         Response unmatchedServerEvents = RestAssured.get(getBaseUrl() + WIRE_MOCK_UNMATCHED_URL);
         List<Map<String, String>> requests = unmatchedServerEvents.jsonPath().getList("requests");
-        log.info("Unmatched requests: \n" + requests);
+        log.info("Unmatched requests: \n{}", requests);
         Assertions.assertTrue((requests.size() == 0), "Some unmatched request found");
     }
 
     @SneakyThrows
-    public void checkMatchedRequest(int countExpected, File requestJson) {
+    public void assertMatchedRequestCount(int countExpected, File requestJson) {
         RequestSpecification matchedCountRequest = buildFindRequest(requestJson);
-        log.info("Checking matched requests for: \n" + new String(Files.readAllBytes(Path.of(requestJson.getPath()))));
+        log.info("Checking matched requests for: \n{}", new String(Files.readAllBytes(Path.of(requestJson.getPath()))));
         Response matchedCountResponse = matchedCountRequest.post(getBaseUrl() + WIRE_MOCK_MATCHED_COUNT_URL);
         int countActual = Integer.parseInt(matchedCountResponse.jsonPath().getString("count"));
         Assertions.assertEquals(countExpected, countActual);

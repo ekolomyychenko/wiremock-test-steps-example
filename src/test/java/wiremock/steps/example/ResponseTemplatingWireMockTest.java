@@ -9,7 +9,7 @@ import static org.hamcrest.core.StringContains.containsString;
 
 public class ResponseTemplatingWireMockTest extends BaseTest {
 
-    private final RequestSteps steps = new RequestSteps();
+    private static final RequestSteps steps = new RequestSteps();
 
     @Test
     @DisplayName("Пример подстановки в ответ от wiremock данных на лету — это может быть переменная из контекста или сессии, которая не известна заранее")

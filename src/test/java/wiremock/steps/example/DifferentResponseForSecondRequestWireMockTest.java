@@ -9,7 +9,7 @@ import static org.hamcrest.core.StringContains.containsString;
 
 public class DifferentResponseForSecondRequestWireMockTest extends BaseTest {
 
-    private final RequestSteps steps = new RequestSteps();
+    private static final RequestSteps steps = new RequestSteps();
 
     @Test
     @DisplayName("Пример разного ответа от wiremock на одинаковые запросы, в зависимости от номера запроса")

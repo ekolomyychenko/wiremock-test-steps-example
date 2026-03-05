@@ -27,6 +27,7 @@ src/
   main/java/wiremock/steps/example/
     BaseTest.java                        # Starts embedded WireMock server on a random free port
     WireMockClient.java                  # Admin API client for request verification
+    RequestSteps.java                    # REST Assured step methods with Allure integration
     CustomResponseTemplateTransformer.java  # Custom transformer for dynamic response values
 
   test/java/wiremock/steps/example/
@@ -81,6 +82,6 @@ Mapping file: `mappings/response_templating.json`
 `WireMockClient` wraps the WireMock `/__admin` API and provides:
 - `getServerEventBody(File)` — get the request body of a matched request
 - `getServerEventQueryParams(File)` — get query params of a matched request
-- `checkMatchedRequest(int, File)` — assert a stub was called N times
-- `checkUnmatchedRequest()` — assert no unmatched requests occurred
+- `assertMatchedRequestCount(int, File)` — assert a stub was called N times
+- `assertNoUnmatchedRequests()` — assert no unmatched requests occurred
 - `deleteAllServerEvents()` — clear recorded requests between tests
